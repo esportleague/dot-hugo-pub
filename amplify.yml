@@ -1,0 +1,22 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - "cd exampleSite"
+        - "npm install"
+        - "echo 'Hugo version: $(hugo version)'"
+    build:
+      commands:
+        - "hugo --environment=production --themesDir=../.. --baseURL \"$AWS_AMPLIFY_BASE_URL\""
+  artifacts:
+    baseDirectory: exampleSite/public
+    files:
+      - '**/*'
+  cache:
+    paths: []
+environment:
+  variables:
+    NODE_VERSION: "18.14.0"
+    HUGO_VERSION: "0.115.4"
+    HUGO_THEME: "repo"
